@@ -6,6 +6,9 @@ class ProxyLogger
 	public:
 		virtual ~ProxyLogger() {}
 		virtual void init() = 0;
+        virtual void loop() = 0;
+        int ServerSockFd;
+        int fdmax;
 };
 
 
