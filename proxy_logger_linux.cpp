@@ -83,6 +83,7 @@ void ProxyLoggerLinux::init()
     
     // we have only one socket at this point, so initialize max value by it
     fdmax = ServerSockFd;
+    ClientFdSetV.push_back(ServerSockFd);
 }
 
 void ProxyLoggerLinux::loop()
@@ -94,6 +95,7 @@ void ProxyLoggerLinux::loop()
     }
     
     for(int i = 0; i <= fdmax; i++)
+    //for (auto i : ClientFdSetV)  //maybe better solution
     {
         if (FD_ISSET(i, &ClientFdSet)) 
         {   
@@ -112,6 +114,18 @@ void ProxyLoggerLinux::loop()
                 {
                     // add descriptor to ServerFdSet
                     FD_SET(newfd, &ServerFdSet);
+                    auto ProxySockFd = socket(AF_INET, SOCK_STREAM | SOCK_CLOEXEC, 0);
+                    if (connect(ProxySockFd, &PosgreAddr, sizeof(PosgreAddr)) == 0)
+                    {
+                        // connected
+                        std::cout << "Connected" << std::endl;
+                    }
+                    else
+                    {
+                        throw std::runtime_error("ERROR on connect: " + std::string(std::strerror(errno)));
+                    }
+
+                    ClientFdSetV.push_back(newfd);
                     if (newfd > fdmax)
                     {   
                         // update max descriptor number

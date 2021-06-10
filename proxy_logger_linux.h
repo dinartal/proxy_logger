@@ -8,6 +8,8 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 
+#include <vector>
+
 class ProxyLoggerLinux : private ProxyLogger
 {
 	public:
@@ -18,6 +20,7 @@ class ProxyLoggerLinux : private ProxyLogger
     private:
         fd_set ServerFdSet;
         fd_set ClientFdSet;
+        std::vector<int> ClientFdSetV;
         struct timeval tv;
         int newfd;        // descriptor for new connections after accept()
         struct sockaddr_storage remoteaddr; // client addr
@@ -25,6 +28,7 @@ class ProxyLoggerLinux : private ProxyLogger
         char buf[256];    // client data buffer
         int nbytes;
         char remoteIP[INET6_ADDRSTRLEN];
+        struct sockaddr PosgreAddr;
 };
 
 
