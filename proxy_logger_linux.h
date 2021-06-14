@@ -8,19 +8,21 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 
-#include <vector>
+#include <set>
 
 class ProxyLoggerLinux : private ProxyLogger
 {
 	public:
 		virtual void init();
         virtual void loop();
+        virtual void log(const char* data, int len);
         ~ProxyLoggerLinux();
     
     private:
         fd_set ServerFdSet;
         fd_set ClientFdSet;
-        std::vector<int> ClientFdSetV;
+        std::set<int> ClientFdSetV;
+        //std::vector<int>::iterator it;
         struct timeval tv;
         int newfd;        // descriptor for new connections after accept()
         struct sockaddr_storage remoteaddr; // client addr
