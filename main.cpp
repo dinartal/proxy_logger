@@ -3,10 +3,10 @@ int main (int argc, char** argv)
 {
 	ProxyLoggerLinux p;
 	p.init();
-    while(true)
-    {
-        p.loop();
-    }
-    
+	while(true)
+	{
+		p.loop();
+	}
+
 	return 0;
 }
