@@ -1,15 +1,14 @@
-#ifndef PROXY_LOGGER_H
-#define PROXY_LOGGER_H
+#pragma once
 
 #include <map>
-
-class ProxyLogger
+namespace proxylog
 {
-public:
-	virtual ~ProxyLogger() {}
-	virtual void init() = 0;
-	virtual void loop() = 0;
-	virtual void log(const char* data, int len) = 0;
-};
-
-#endif
+	class ProxyLogger
+	{
+	public:
+		virtual ~ProxyLogger() {}
+		virtual void init() = 0;
+		virtual void loop() = 0;
+		virtual void log(const char* data, int len) = 0;
+	};
+}

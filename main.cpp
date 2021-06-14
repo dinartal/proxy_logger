@@ -1,7 +1,7 @@
 #include "proxy_logger_linux.h"
 int main (int argc, char** argv)
 {
-	ProxyLoggerLinux p;
+	proxylog::ProxyLoggerLinux p;
 	p.init();
 	while(true)
 	{
