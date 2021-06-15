@@ -21,7 +21,7 @@ namespace proxylog
 		return &(((struct sockaddr_in6*)sa)->sin6_addr);
 	}
 
-	void ProxyLoggerLinux::init()
+	ProxyLoggerLinux::ProxyLoggerLinux()
 	{
 		ServerSockFd = check(socket(AF_INET, SOCK_STREAM | SOCK_CLOEXEC, 0), "ERROR opening socket: ");
 

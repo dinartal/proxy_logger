@@ -2,7 +2,7 @@
 int main (int argc, char** argv)
 {
 	proxylog::ProxyLoggerLinux p;
-	p.init();
+
 	while(true)
 	{
 		p.loop();

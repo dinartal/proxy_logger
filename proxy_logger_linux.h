@@ -15,9 +15,9 @@ namespace proxylog
 	class ProxyLoggerLinux : private ProxyLogger
 	{
 	public:
-		virtual void init();
 		virtual void loop();
 		virtual void log(const char* data, int len);
+        ProxyLoggerLinux();
 		~ProxyLoggerLinux();
 
 		int ClientPort = 5430;
